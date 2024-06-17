@@ -1259,6 +1259,7 @@ class ChessAnalysis:
         Returns:
             dict[str, tuple[SingleGame, ...]]: The games filtered by time control for the given openings.
         """
+                
         games = defaultdict(list)
         for opening in openings:
             _updateDateGames(games, opening, gamesBound, eloBound)
@@ -1296,6 +1297,7 @@ class ChessAnalysis:
         Returns:
             dict[str, Tuple[SingleGame, ...]]: The games filtered by result for the given openings.
         """
+                             
         games = defaultdict(list)
 
         for opening in openings:
@@ -1313,6 +1315,7 @@ class ChessAnalysis:
         Returns:
             Union[OpeningData, Tuple[OpeningData, ...]]: The most common opening(s).
         """
+        
         if opening is None:
             return self._getMostCommon()
         else:
@@ -1330,6 +1333,7 @@ class ChessAnalysis:
         Returns:
             Union[OpeningData, Tuple[OpeningData, ...]]: The statistics for the provided opening name(s).
         """
+        
         return self._extractOpeningInstance(openingName)
 
     def getMostAccurateOpening(self) -> Union[Tuple[OpeningData, ...], None]:
@@ -1339,6 +1343,7 @@ class ChessAnalysis:
         Returns:
             Union[Tuple[OpeningData, ...], None]: The most accurate opening(s).
         """
+        
         return tuple(self._extractOpeningInstance(list(self.getAvgError(takeTop=1).keys())))
 
     def getBestOpeningRecord(self) -> Union[Tuple[OpeningData, ...], None]:
@@ -1348,6 +1353,7 @@ class ChessAnalysis:
         Returns:
             Union[Tuple[OpeningData, ...], None]: The opening(s) with the best record.
         """
+        
         return tuple(self._extractOpeningInstance(list(self.getRecord(takeTop=1).keys())))
 
     def getLeastAccurateOpening(self) -> Union[Tuple[OpeningData, ...], None]:
@@ -1357,6 +1363,7 @@ class ChessAnalysis:
         Returns:
             Union[Tuple[OpeningData, ...], None]: The least accurate opening(s).
         """
+        
         return tuple(self._extractOpeningInstance(list(self.getAvgError(takeTop=1, reverse=False).keys())))
 
     def getWorstOpening(self) -> Union[Tuple[OpeningData, ...], None]:
@@ -1366,6 +1373,7 @@ class ChessAnalysis:
         Returns:
             Union[Tuple[OpeningData, ...], None]: The worst opening(s).
         """
+        
         return tuple(self._extractOpeningInstance(list(self.getRecord(takeTop=1, reverse=False).keys())))
 
     def getAllGames(self) -> list[SingleGame]:
@@ -1375,6 +1383,7 @@ class ChessAnalysis:
         Returns:
             list[SingleGame]: The list of all games.
         """
+        
         return list(self._allGames)
 
     def exportCSV(self, output_file: str = 'exported_data.csv'):
@@ -1391,11 +1400,13 @@ class ChessAnalysis:
         headers = Constants.CSV_HEADERS
 
         # Open the CSV file for writing
+        
         with open(output_file, mode='w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(headers)  # Write the headers
 
             # Iterate over the data and write each row
+            
             for game in data_to_export:
                 row = [
                     game.getDate().strftime("%Y-%m-%d"),
@@ -1412,26 +1423,3 @@ class ChessAnalysis:
                     ';'.join(f'{x:.2f}' for x in game.getTimeSpent())  # Format floats to 2 decimal places
                 ]
                 writer.writerow(row)
-
-
-if __name__ == '__main__':
-    stockFish = Stockfish(Constants.STOCKFISH_DIR)
-    stockFish.set_depth(20)
-    # stockFish.set_elo_rating(3400)
-    # stockFish.update_engine_parameters({"Min Split Depth": 20, "Hash": 2048})
-    a = ChessAnalysis('Dataset/4GamesFrench.pgn', 'tomerkein', stockFish)
-    # print(a.getGamesByTimeControl(plot=True))
-    # print(a.getWorstOpening())
-    # print(a.getLeastAccurateOpening())
-    # print(a.getAvgTimePerMove(plot=True))
-    # print(a.getMostCommonOpening())
-    # print(a.getErrorPerMove(plot=True))
-    # print(a.getAvgError(plot=True))
-    # print(a.getRecordByElo(plot=True))
-    # print(a.getAvgMoveLeavingOpening(plot=True))
-    # print(a.getGamesAgainstPlayer(plot=True))
-    # print(a.getMostAccurateOpening())
-    # print(a.getGamesByResult(opponent="VRemo"))
-    # print(a.getBestOpeningRecord())
-    # print(a.getGamesByDate(plot=True))
-    a.exportCSV()
