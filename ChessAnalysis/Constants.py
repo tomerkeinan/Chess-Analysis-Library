@@ -1,0 +1,176 @@
+OPENING_START_MARKER = '["eco","name","pgn"],'
+OPENING_END_MARKER = '],"csvError":null'
+RESULT_START_MARKER = 'Result "'
+RESULT_END_MARKER = '"'
+OPENING_PATTERN = r'\["(.*?)","(.*?)","(.*?)"\]'
+CLOCK_PATTERN = r'\d{1,2}:\d{2}:\d{2}(\.\d+)?'
+BLACK_MOVE_NUMBER_PATTERN = r'\d+\.\.\.\s*'
+WHITE_MOVE_NUMBER_PATTERN_NO_END_LINE = r'\d+\. '
+WHITE_MOVE_NUMBER_PATTERN_END_OF_LINE = r'\d+\.\n'
+ONE_LINE_PATTERN = r'\s*\n\s*'
+DRAW = "1/2"
+WIN = "1"
+LOSS = "0"
+RESULT_SEPERATOR = "-"
+DATE_METADATA = "Date"
+WHITE_METADATA = "White"
+BLACK_METADATA = "Black"
+WHITE_ELO_METADATA = "WhiteElo"
+BLACK_ELO_METADATA = "BlackElo"
+RESULT_METADATA = "Result"
+TIME_CONTROL_METADATA = "TimeControl"
+INVALID_MOVE_NUMBER = "Invalid move number!. Move number must be greater than zero!"
+NO_PGN_FILES_ERR = "No .pgn files found!"
+FILE_NOT_PGN_ERR = "File is not a .pgn file!"
+CLK_PATTERN_1 = r'\{\[%clk\s*(\d+:\d+:\d+:\d+\.\d+)\s*]}'
+CLK_PATTERN_2 = r'\{\[%clk\s*(\d+:\d+:\d+\.\d+)\s*]}'
+CLK_PATTERN_3 = r'\{\[%clk\s+(\d+:\d+:\d+)]}'
+CLK_PATTERN_4 = r'\{\[%clk\s+(\d+\.\d+)]}'
+TIME_PATTERN = r'(\d+):(\d+):(\d+)(\.\d+)?'
+CLK_PATTERN_GROUP = r'\1'
+STOCKFISH_DIR = '/Users/tomerkeinan/PycharmProjects/ChessLib/Resources/stockfish-macos-m1-apple-silicon'
+NO_FORCED_MATE = 'cp'
+THERE_IS_FORCED_MATE = 'mate'
+MINIMUM_NUMBER_OF_MOVES_WITH_CLOCK_FORMAT = 4
+MINIMUM_NUMBER_OF_MOVES_WITHOUT_CLOCK_FORMAT = 2
+WHITE_FORCED_MATE_EVAL = 75
+BLACK_FORCED_MATE_EVAL = 75
+LONG_MATE_PUNISHMENT = 5
+MINIMUM_MOVES_ERR = "Each pgn analyzed must have at least two moves played!(one by white and one by black)"
+OPENING_SEPERATOR = ":"
+NORMALIZED_HOURS = 360000
+NORMALIZED_MINUTES = 6000
+NORMALIZED_SECONDS = 100
+STOCKFISH_MATE_ANNOUNCEMENT = "mate"
+USERNAME_NOT_MATCH_ERR = "Username does not match!"
+NO_MAIN_OPENING_SPECIFIED_ERR = "If variation has selected, opening must be specified"
+NO_OPENING_BUT_THERE_IS_SIMILAR_ERR = ('Could not find the given variation, maybe you did not played that'
+                                       'variation at all, or maybe you meant one of these variations?: {}')
+NO_OPENING_ERR = "No opening found!, maybe you did not played that opening at all."
+LOSS_KEY = "losses"
+WIN_KEY = "wins"
+DRAW_KEY = "draws"
+INVALID_OPENINGS_TYPES = "Invalid openings type. openings should be list[str]."
+INVALID_FROM_DATE_TYPE = "Invalid fromDate type. fromDate type should be str."
+INVALID_TO_DATE_TYPE = "Invalid toDate type. toDate type should be str or None."
+INVALID_PLOT_TYPE = "Invalid plot type. Plot type should be bool."
+INVALID_REVERSE_TYPE = "Invalid reverse type. Reverse type should be bool."
+INVALID_TAKE_TOP = "takeTop must be int >= 0."
+VALUE_VALIDITY_ERR_ELO_BOUND = "eloBound must be >= 0."
+VALUE_VALIDITY_ERR_SET_GAP = "setGap must be >= 1."
+ADD_VARIATION_TO_VARIATION_ERR = "Cannot add variation to variation!"
+INVALID_TIME_CONTROL = "timeControl must be of type str, with format of int [Optional: +int]. Both int must be >= 0."
+NORMALIZED_ERROR = 1
+ROUNDING_ERROR = 3
+ROUNDING_TIME = 2
+OPENINGS_ARG = "openings"
+TAKE_TOP_ARG = "takeTop"
+REVERSE_ARG = "reverse"
+PLOT_ARG = "plot"
+FROM_DATE_ARG = "fromDate"
+TO_DATE_ARG = "toDate"
+GAMES_BOUND_ARG = "gamesBound"
+ELO_BOUND_ARG = "eloBound"
+MOVE_BOUND_ARG = "moveBound"
+SET_GAP_ARG = "setGap"
+OPPONENT_ARG = "opponent"
+RESULT_ARG = "result"
+TIME_CONTROL_ARG = "timeControl"
+DEFAULT_TIME_CONTROL = None
+DEFAULT_GAMES_BOUND = 1
+DEFAULT_MOVE_BOUND = 1
+DEFAULT_TAKE_TOP = 0
+DEFAULT_PLOT = False
+DEFAULT_REVERSE = True
+DEFAULT_OPENING_ARGUMENT = None
+DEFAULT_ELO_BOUND = 4000
+DEFAULT_SET_GAP = 50
+DEFAULT_RESULT = (0, 0.5, 1)
+DEFAULT_MIN_TIMES_PLAYED = 1
+DEFAULT_OPPONENT_VALUE = None
+MIN_VAL_FOR_TAKE_TOP = 0
+MIN_VAL_FOR_SET_GAP = 1
+PGN_META_DATA_TO_GAME_SEPERATOR = "\n\n"
+UNKNOWN_OPENING = "Unknown opening"
+MAX_TAKE_TOP = 100000
+REMOVE_DUPLICATE = 'self'
+DRAW_POINTS = 0.5
+NO_TIME_BONUS = 0
+WHITE_AND_BLACK_PLAYED_ONCE_FLAG = "1..."
+ATROPHIED_GAME_MSG = ("\033[91mGame number {} is a atrophied game pgn - the game over before white and black"
+                      " played at least once. Therefore, the game was not included in the final analysis.\033[0m")
+DEFAULT_WIN_VAL = 0
+DEFAULT_DRAW_VAL = 0
+DEFAULT_LOSS_VAL = 0
+INVALID_RESULT_ERR = ("Invalid result input. Please enter 0 to loss, 0.5 to draw and 1 to win. You can either enter"
+                      "tuple of results if you want the games of union results.")
+INVALID_RESULT_TYPE = "Result must be of type float/int/tuple[float]/tuple[int]!"
+ENUM_WIN_KEY = 1
+ENUM_DRAW_KEY = 0.5
+ENUM_LOSS_KEY = 0
+ENUM_BLACK_KEY = 2
+ENUM_WHITE_KEY = 1
+INVALID_OPPONENT_TYPE = "opponent argument must be either string, or tuple[str]."
+GAMES_BOUND_ERR = "gamesBound must be int >= 0."
+ELO_BOUND_ERR = "eloBound must be int >= 0."
+MOVE_BOUND_ERR = "moveBound must be int >= 0."
+ARG_NAME_VALUE_SEPERATOR = "="
+ARG_NAME_TYPING_SEPERATOR = ":"
+DATE_SEPERATOR = "."
+MIN_GAMES_BOUND = 1
+MIN_MOVE_BOUND = 1
+MIN_ELO_BOUND = 1
+DEFAULT_OPENING_DATA_NAME = "Not Specified"
+NO_GAMES_ANALYZE_ERR = "No games found to analyze!"
+DEFAULT_FROM_DATE_VALUE = "1.1.1"
+DEFAULT_TO_DATE_VALUE = None
+GAME_NOT_FOUND_ERR = "Could not find the given game.Failed to remove!"
+REMOVE = -1
+APPEND = 1
+NEXT_MOVE_JUMP = 4
+WHITE_FIRST_MOVE_IND = 1
+BLACK_FIRST_MOVE_IND = 3
+DEFAULT_IS_VARIATION = False
+PROCESS_ANALYZE_MSG = 'start analyzing game {}. There are total {} games to analyze.'
+TIME_CONTROL_SEPERATOR = "+"
+DICT_TO_PLOT_ERR = "dictToPlot must be of type dict."
+UNSUPPORTED_DATA_FORMAT = "Unsupported data format."
+ERROR_PER_MOVE_TITLE = "Avg Error Per Move"
+ERROR_PER_MOVE_X_LABEL = "#Move"
+ERROR_PER_MOVE_Y_LABEL = "Avg Error Per Move"
+JUMP_TO_MAKE_PLOT_MORE_SPARSE = 20
+NUM_OF_PLOT_PRINTED = ("\033[91mThe plot {} been split into {} seperated plots,"
+                       " so the plots will not be to dense.\033[0m")
+PLOT_STYLE = "fivethirtyeight"
+AVG_ERROR_TITLE = "Avg Error"
+AVG_ERROR_X_LABEL = "Opening Name"
+AVG_ERROR_Y_LABEL = "Avg Error Per Opening"
+TIME_SPENT_TITLE = "Avg Time Spent Per Move"
+TIME_SPENT_X_LABEL = "#Move"
+TIME_SPENT_Y_LABEL = "Avg Time Spent Per Move"
+LEAVING_OPENING_TITLE = "Avg Move Leaving Opening"
+LEAVING_OPENING_X_LABEL = "Opening Name"
+LEAVING_OPENING_Y_LABEL = "Avg Move"
+RECORD_TITLE = "Avg Point Per Game"
+RECORD_X_LABEL = "Opening Name"
+RECORD_Y_LABEL = "Avg Point"
+RESULT_BY_ELO_TITLE = "Avg Point Per Game Sorted By Elo"
+RESULT_BY_ELO_X_LABEL = "Elo Range"
+RESULT_BY_ELO_Y_LABEL = "Avg Point"
+AGAINST_PLAYER_TITLE = "Avg Error Against Players"
+AGAINST_PLAYER_X_LABEL = "Opponent"
+AGAINST_PLAYER_Y_LABEL = "Avg Error"
+BY_TIME_CONTROL_TITLE = "Avg Error Per Time Control"
+BY_TIME_CONTROL_X_LABEL = "Time Control"
+BY_TIME_CONTROL_Y_LABEL = "Avg Error"
+BY_DATE_TITLE = "Avg Error Per Date"
+BY_DATE_X_LABEL = "Date"
+BY_DATE_Y_LABEL = "Avg Error"
+MAXIMUM_ITEMS_PER_BAR = 10
+CSV_HEADERS = [
+            'Date', 'Opponent', 'Result', 'User Elo', 'Opponent Elo',
+            'Main Opening', 'Variation', 'Move Leaving Opening',
+            'Time Control', 'Time Bonus', 'Precision Per Move', 'Time Spent Per Move'
+        ]
+VALID_GAME_EXTENSION = ".pgn"
+VALID_OPENING_BOOK_EXTENSION = ".tsv"
