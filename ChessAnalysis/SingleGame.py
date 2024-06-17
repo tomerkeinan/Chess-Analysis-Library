@@ -26,6 +26,7 @@ def _openingBookInit() -> dict[str, str]:
     Returns:
         dict[str, str]: A dictionary mapping openings to their descriptions.
     """
+    
     openingBook = {}
     opening_book_dir = pkg_resources.resource_filename(__name__, 'OpeningBook')
     for file_name in os.listdir(opening_book_dir):
@@ -54,6 +55,7 @@ def _addMoveOrder(moveNum: int, move: str) -> str:
     Returns:
         str: The move string with move numbering.
     """
+    
     cur_move = ""
     if moveNum % 2 == 0:
         cur_move += str(int((moveNum / 2) + 1)) + ". "  # Move numbering pattern as the key in the
@@ -72,6 +74,7 @@ def _parseTime(time: str) -> int:
     Returns:
         int: The total time in seconds.
     """
+    
     pattern = Constants.TIME_PATTERN
     match = re.match(pattern, time)
     hours = int(match.group(1))
@@ -92,6 +95,7 @@ def extractTimeControl(timeControl: str) -> Tuple[int, int]:
     Returns:
         Tuple[int, int]: The main time control and bonus time in seconds.
     """
+    
     assert isinstance(timeControl, str), Constants.INVALID_TIME_CONTROL
     parts = timeControl.split(Constants.TIME_CONTROL_SEPERATOR, 1)
 
@@ -117,6 +121,7 @@ def validateAnalysis(method):
     Returns:
         Callable: The wrapped method.
     """
+    
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         if not self.isAnalyzed():
@@ -135,6 +140,7 @@ def parseDate(date: str) -> datetime:
     Returns:
         datetime: The parsed datetime object.
     """
+    
     if date is None:
         return datetime.today()
     date = date.split(Constants.DATE_SEPERATOR)
@@ -204,6 +210,7 @@ class SingleGame:
         Returns:
             SingleGame: A deep copy of the instance.
         """
+        
         new_instance = SingleGame(
             self._pgn,
             self._whiteElo,
@@ -237,6 +244,7 @@ class SingleGame:
         Returns:
             ChessResult: The extracted game result.
         """
+        
         result = result.split(Constants.RESULT_SEPERATOR)[0]
         if result == Constants.DRAW:
             return ChessResult.DRAW
@@ -251,6 +259,7 @@ class SingleGame:
         Returns:
             bool: True if the PGN contains clock format, False otherwise.
         """
+        
         clock_pattern = re.compile(Constants.CLOCK_PATTERN)
 
         # Split the content by spaces and check each part
@@ -264,6 +273,7 @@ class SingleGame:
 
     def _initOpenings(self) -> None:
         """Initialize the main opening and variation from the PGN."""
+        
         pgn: list[str] = self._sanitize_pgn()
         gameplay = []
         turn = ChessColor.WHITE
@@ -310,6 +320,7 @@ class SingleGame:
         Returns:
             list[str]: The list of moves.
         """
+        
         pgn = self._pgn.strip().split(' ')
         if self._pgnWithClockFormat:
             pgn = self._extractTimeManagement(pgn)  # Cutting out the time control
@@ -325,6 +336,7 @@ class SingleGame:
         Returns:
             list[str]: The list of moves without time information.
         """
+        
         prev_time, starting_ind = self._initTimeControl(pgn)
         bonusTime = self._bonusTime * Constants.NORMALIZED_SECONDS
         prev_time += bonusTime
@@ -347,6 +359,7 @@ class SingleGame:
         Returns:
             Tuple[int, int]: The previous time and the starting index.
         """
+        
         if self._userColor == ChessColor.WHITE:
             prev_time = self._timeControl * Constants.NORMALIZED_SECONDS
             starting_ind = Constants.WHITE_FIRST_MOVE_IND
@@ -357,6 +370,7 @@ class SingleGame:
 
     def _validate_pgn(self) -> None:
         """Validate the PGN string to ensure it meets the minimum move requirements."""
+        
         pgn = self._pgn.split(' ')
         if self._isThereClk() and len(pgn) < Constants.MINIMUM_NUMBER_OF_MOVES_WITH_CLOCK_FORMAT:
             raise ValueError(Constants.MINIMUM_MOVES_ERR)
@@ -370,6 +384,7 @@ class SingleGame:
         Returns:
             int: The evaluation value.
         """
+        
         StockEval = self._stockfish.get_evaluation()
         mateDetector = StockEval['type']
         value = StockEval['value']
@@ -389,6 +404,7 @@ class SingleGame:
             beforeTurnEval (int): The evaluation before the move.
             afterTurnEval (int): The evaluation after the move.
         """
+        
         self._errorPerMove.append(abs(beforeTurnEval - afterTurnEval) / Constants.NORMALIZED_ERROR)
 
     def _updateOpeningAndVariation(self, gameplay: str) -> bool:
@@ -401,6 +417,7 @@ class SingleGame:
         Returns:
             bool: True if the opening or variation was updated, False otherwise.
         """
+        
         if gameplay not in self._openingBook:
             return False
 
@@ -423,6 +440,7 @@ class SingleGame:
         Returns:
             bool: True if the game has been analyzed, False otherwise.
         """
+        
         return self._isAnalyzed
 
     def getElo(self) -> int:
@@ -432,6 +450,7 @@ class SingleGame:
         Returns:
             int: The ELO rating of the user.
         """
+        
         if self._userColor == ChessColor.WHITE:
             return self._whiteElo
         return self._blackElo
@@ -443,6 +462,7 @@ class SingleGame:
         Returns:
             int: The ELO rating of the opponent.
         """
+        
         if self._userColor == ChessColor.WHITE:
             return self._blackElo
         return self._whiteElo
@@ -454,6 +474,7 @@ class SingleGame:
         Returns:
             ChessResult: The result of the game.
         """
+        
         return self._gameResult
 
     def getStrGameResult(self) -> str:
@@ -463,6 +484,7 @@ class SingleGame:
         Returns:
             str: The result of the game as a string ("win", "loss", "draw").
         """
+        
         if self._gameResult == ChessResult.WIN:
             return "win"
         elif self._gameResult == ChessResult.LOSS:
@@ -478,6 +500,7 @@ class SingleGame:
         Returns:
             str: The main opening of the game.
         """
+        
         return self._mainOpening
 
     @validateAnalysis
@@ -488,6 +511,7 @@ class SingleGame:
         Returns:
             str: The variation of the game.
         """
+        
         return self._openingVariation
 
     @validateAnalysis
@@ -498,6 +522,7 @@ class SingleGame:
         Returns:
             int: The move number when leaving the opening.
         """
+        
         return self._moveLeavingOpening
 
     def getTimeControl(self) -> int:
@@ -507,6 +532,7 @@ class SingleGame:
         Returns:
             int: The main time control in seconds.
         """
+        
         return self._timeControl
 
     def getTimeBonus(self) -> int:
@@ -516,6 +542,7 @@ class SingleGame:
         Returns:
             int: The bonus time in seconds.
         """
+        
         return self._bonusTime
 
     def getTotalTimeControl(self) -> str:
@@ -525,6 +552,7 @@ class SingleGame:
         Returns:
             str: The total time control in the format "main+bonus".
         """
+        
         return str(self._timeControl) + Constants.TIME_CONTROL_SEPERATOR + str(self._bonusTime)
 
     @validateAnalysis
@@ -535,6 +563,7 @@ class SingleGame:
         Returns:
             list[float]: The list of time spent per move.
         """
+        
         return self._timeSpentPerMove
 
     @validateAnalysis
@@ -545,6 +574,7 @@ class SingleGame:
         Returns:
             list[float]: The list of error per move.
         """
+        
         return self._errorPerMove
 
     def getOpeningBook(self) -> dict[str, str]:
@@ -554,6 +584,7 @@ class SingleGame:
         Returns:
             dict[str, str]: The opening book dictionary.
         """
+        
         return self._openingBook
 
     @validateAnalysis
@@ -564,6 +595,7 @@ class SingleGame:
         Returns:
             float: The average error of the game.
         """
+        
         return sum(self._errorPerMove) / len(self._errorPerMove)
 
     def getOpponent(self) -> str:
@@ -573,6 +605,7 @@ class SingleGame:
         Returns:
             str: The opponent's name.
         """
+        
         return self._opponent
 
     def getDate(self) -> datetime:
@@ -582,6 +615,7 @@ class SingleGame:
         Returns:
             datetime: The date of the game.
         """
+        
         return self._date
 
     @validateAnalysis
@@ -592,6 +626,7 @@ class SingleGame:
         Returns:
             str: The name of the game, including the main opening and variation.
         """
+        
         if self._openingVariation is not None:
             return self._mainOpening + Constants.OPENING_SEPERATOR + " " + self._openingVariation
         return self._mainOpening
