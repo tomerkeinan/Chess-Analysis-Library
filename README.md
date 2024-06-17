@@ -246,6 +246,7 @@ A few things to note:
 | `output_file` | `str` | The name of the output CSV file. Defaults to 'exported_data.csv'. |
 
 
+
 # ChessAnalysis Installation Guide
 
 ## Overview
