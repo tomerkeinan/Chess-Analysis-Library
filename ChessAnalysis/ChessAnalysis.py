@@ -683,7 +683,7 @@ class ChessAnalysis:
         """
         Processes the provided PGN file.
         """
-        if not self._dataset.endswith(Constants.VALID_EXTENSION):
+        if not self._dataset.endswith(Constants.VALID_GAME_EXTENSION):
             raise ValueError(Constants.FILE_NOT_PGN_ERR)
         with open(self._dataset, 'r') as f:
             self._processPgnFile(f.read())
