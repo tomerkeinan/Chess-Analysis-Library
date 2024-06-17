@@ -1,8 +1,7 @@
 
 # Chess Analysis
 
-ChessAnalysis: Comprehensive Chess Game Analysis Library
-Description:
+Brief description:
 
 ChessAnalysis is a flexible library designed to analyze chess games in-depth. It provides various functionalities to evaluate move error, opening strategies, time spent per move, and game results based on multiple criteria such as ELO ratings and specific opponents. The library is tailored for chess enthusiasts, researchers, and developers who want to gain insights from their chess games or build chess analysis tools.
 
