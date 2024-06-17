@@ -68,31 +68,6 @@ If no errors occur, the installation is successful.
 
 ChessAnalysis requires opening book data stored in `.tsv` files located in the `OpeningBook` directory. The setup script is configured to include these files.
 
-Make sure your project structure looks like this:
-
-```
-ChessAnalysis/
-├── ChessAnalysis/
-│   ├── __init__.py
-│   ├── ChessAnalysis.py
-│   ├── Constants.py
-│   ├── Enums.py
-│   ├── MoveStats.py
-│   ├── OpeningData.py
-│   ├── PlotFactory.py
-│   ├── SingleGame.py
-│   └── OpeningBook/
-│       ├── a.tsv
-│       ├── b.tsv
-│       ├── c.tsv
-│       ├── d.tsv
-│       └── e.tsv
-├── dist/
-│   └── ChessAnalysis-0.1.0.tar.gz
-├── setup.py
-└── README.md
-```
-
 The `OpeningBook` directory should contain all necessary `.tsv` files.
 
 ## Uninstallation
