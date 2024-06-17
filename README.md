@@ -246,6 +246,90 @@ A few things to note:
 | `output_file` | `str` | The name of the output CSV file. Defaults to 'exported_data.csv'. |
 
 
+# ChessAnalysis Installation Guide
+
+## Overview
+
+ChessAnalysis is a Python library designed for analyzing chess games. It provides various functions to analyze game statistics, including errors per move, average time per move, records by openings, and more. This guide will help you install the library and its dependencies.
+
+## Prerequisites
+
+Before installing ChessAnalysis, ensure you have the following prerequisites:
+
+1. **Python 3.6 or later**: Make sure you have Python 3.6 or a newer version installed on your system.
+2. **pip**: The Python package installer should be available.
+
+## Step-by-Step Installation
+
+### 1. Clone the Repository
+
+Clone the ChessAnalysis repository from GitHub to your local machine:
+
+```sh
+git clone https://github.com/tomerkeinan/ChessAnalysis.git
+cd ChessAnalysis
+```
+
+### 2. Set Up a Virtual Environment
+
+It is recommended to create a virtual environment to manage the dependencies for your project:
+
+```sh
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Create the Distribution Package
+
+Create a source distribution package for ChessAnalysis:
+
+```sh
+python3 setup.py sdist
+```
+
+This will generate a `.tar.gz` file in the `dist` directory.
+
+### 4. Install the Package
+
+Install the ChessAnalysis package using `pip`:
+
+```sh
+pip install dist/ChessAnalysis-0.1.0.tar.gz
+```
+
+### 5. Verify the Installation
+
+To ensure the library is installed correctly, open a Python interpreter and try importing the main classes:
+
+```sh
+python
+```
+
+```python
+from ChessAnalysis import ChessAnalysis, SingleGame
+```
+
+If no errors occur, the installation is successful.
+
+## Including Opening Book Data
+
+ChessAnalysis requires opening book data stored in `.tsv` files located in the `OpeningBook` directory. The setup script is configured to include these files.
+
+The `OpeningBook` directory should contain all necessary `.tsv` files.
+
+## Uninstallation
+
+If you need to uninstall the ChessAnalysis library, you can do so with pip:
+
+```sh
+pip uninstall ChessAnalysis
+```
+
+## Author
+
+Tomer Keinan
+
+
 ## License
 
 MIT License
