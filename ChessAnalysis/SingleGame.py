@@ -1,5 +1,5 @@
 from functools import wraps
-import pkg_resources
+import importlib.resources as pkg_resources
 from .Enums import ChessColor, ChessResult
 from . import Constants
 from typing import Tuple, Union
@@ -28,7 +28,7 @@ def _openingBookInit() -> dict[str, str]:
     """
     
     openingBook = {}
-    opening_book_dir = pkg_resources.resource_filename(__name__, 'OpeningBook')
+    opening_book_dir = pkg_resources.files(__package__) / Constants.OPENING_BOOK_DIR
     for file_name in os.listdir(opening_book_dir):
         input_file = os.path.join(opening_book_dir, file_name)
         if not file_name.endswith(Constants.VALID_OPENING_BOOK_EXTENSION):
