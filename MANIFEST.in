@@ -1,1 +1,1 @@
-include OpeningBook/*.tsv
+include ChessAnalysis/OpeningBooks/*.tsv
