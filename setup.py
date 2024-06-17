@@ -13,7 +13,7 @@ setup(
     url="https://github.com/tomerkeinan",
     packages=find_packages(),
     package_data={
-        "": ["OpeningBook/*.tsv"],
+        "ChessAnalysis": ["OpeningBook/*.tsv"],
     },
     include_package_data=True,
     classifiers=[
